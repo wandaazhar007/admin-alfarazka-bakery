@@ -1,12 +1,11 @@
 // src/styles/_responsive.scss
 @use "./variables" as *;
+@use "sass:map";
 
-// =======================
-// BREAKPOINT MIXINS
-// =======================
+// ========== BREAKPOINT MIXINS ==========
 
 @mixin respond-up($bp-name) {
-  $bp-value: map-get($breakpoints, $bp-name);
+  $bp-value: map.get($breakpoints, $bp-name);
 
   @if $bp-value {
     @media (min-width: $bp-value) {
@@ -20,7 +19,7 @@
 }
 
 @mixin respond-down($bp-name) {
-  $bp-value: map-get($breakpoints, $bp-name);
+  $bp-value: map.get($breakpoints, $bp-name);
 
   @if $bp-value {
     @media (max-width: ($bp-value - 0.02px)) {
@@ -33,9 +32,7 @@
   }
 }
 
-// =======================
-// APP SHELL LAYOUT
-// =======================
+// ========== APP SHELL LAYOUT ==========
 
 .app-shell {
   min-height: 100vh;
@@ -49,20 +46,12 @@
   background-color: $color-bg;
 }
 
-/**
- * app-shell__inner:
- * - Berisi Sidebar + Content
- * - Lebarnya dibatasi max-width sama seperti navbar (.inner)
- * - Di-center pakai margin: 0 auto
- */
 .app-shell__inner {
   display: flex;
   min-height: calc(100vh - $navbar-height);
   max-width: $layout-max-width;
   margin: 0 auto;
   padding: $space-4;
-
-  // supaya sidebar tidak terlalu mepet di atas
   padding-top: $space-4;
 }
 
@@ -73,9 +62,7 @@
   padding-bottom: $space-4;
 }
 
-// =======================
-// RESPONSIVE ADJUSTMENTS
-// =======================
+// ========== RESPONSIVE ==========
 
 @include respond-down("tablet") {
   .app-shell__inner {

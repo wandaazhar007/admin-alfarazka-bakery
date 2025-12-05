@@ -1,5 +1,5 @@
 // src/App.tsx
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
 import Navbar from "./components/navbar/Navbar";
@@ -14,8 +14,21 @@ import SettingsPage from "./pages/settings/SettingsPage";
 import AnalyticsPage from "./pages/analytics/AnalyticsPage";
 
 const App: React.FC = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const location = useLocation();
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() =>
+    Boolean(localStorage.getItem("alfarazka_admin_token"))
+  );
+
+  const isAuthPage = location.pathname === "/login";
+
+  useEffect(() => {
+    // kalau token dihapus dari storage dan user bukan di /login → redirect ke /login
+    if (!localStorage.getItem("alfarazka_admin_token")) {
+      setIsLoggedIn(false);
+    }
+  }, [location.pathname]);
 
   const handleToggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev);
@@ -25,27 +38,20 @@ const App: React.FC = () => {
     setIsSidebarOpen(false);
   };
 
-  const isAuthPage = location.pathname === "/login";
-
-  // TODO: nanti ganti dengan pengecekan token JWT
-  const isLoggedIn = true;
-
   if (!isLoggedIn && !isAuthPage) {
     return <Navigate to="/login" replace />;
   }
 
   if (isAuthPage) {
-    // Layout khusus halaman login (tanpa navbar/sidebar/footer)
     return (
-      <div className="app-shell">
-        <main className="app-shell__content" style={{ maxWidth: "40rem" }}>
-          <LoginPage />
-        </main>
-      </div>
+      <LoginPage
+        onLoginSuccess={() => {
+          setIsLoggedIn(true);
+        }}
+      />
     );
   }
 
-  // Layout utama admin (dengan Navbar, Sidebar, Footer)
   return (
     <div className="app-shell">
       <Navbar onToggleSidebar={handleToggleSidebar} />
