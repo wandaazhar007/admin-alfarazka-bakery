@@ -1,0 +1,93 @@
+// src/pages/login/LoginPage.module.scss
+@use "../../styles/variables" as v;
+
+.loginWrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: v.$color-bg;
+}
+
+.card {
+  width: 100%;
+  max-width: 40rem;
+  background-color: v.$color-surface;
+  border-radius: v.$radius-lg;
+  box-shadow: v.$shadow-soft;
+  padding: v.$space-5;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: v.$space-1;
+}
+
+.subtitle {
+  font-size: 1.3rem;
+  color: v.$color-text-muted;
+  margin-bottom: v.$space-4;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-3;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 1.3rem;
+
+  span {
+    color: v.$color-text-main;
+    font-weight: 500;
+  }
+
+  input {
+    border-radius: v.$radius-md;
+    border: 0.1rem solid v.$color-border;
+    padding: 0.8rem 1.2rem;
+    font-size: 1.3rem;
+    outline: none;
+
+    &:focus {
+      border-color: v.$color-primary;
+      box-shadow: 0 0 0 0.2rem rgba(230, 57, 70, 0.15);
+    }
+  }
+}
+
+.submitButton {
+  margin-top: v.$space-2;
+  border-radius: v.$radius-md;
+  border: none;
+  padding: 0.9rem 1.4rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  background-color: v.$color-primary;
+  color: #fff;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    transform 0.08s ease,
+    box-shadow 0.15s ease;
+
+  &:hover {
+    background-color: v.$color-primary-dark;
+    box-shadow: v.$shadow-soft;
+  }
+
+  &:active {
+    transform: translateY(0.08rem);
+    box-shadow: none;
+  }
+}
+
+.hint {
+  margin-top: v.$space-3;
+  font-size: 1.2rem;
+  color: v.$color-text-muted;
+}

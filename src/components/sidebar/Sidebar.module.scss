@@ -25,7 +25,7 @@
 }
 
 .sidebarClosed {
-  transform: translateX(0); // di desktop sidebar tetap kelihatan
+  transform: translateX(0);
 }
 
 // NAVIGATION
@@ -71,6 +71,7 @@
     color 0.14s ease,
     transform 0.08s ease,
     box-shadow 0.14s ease;
+  text-decoration: none;
 
   svg {
     font-size: 1.4rem;

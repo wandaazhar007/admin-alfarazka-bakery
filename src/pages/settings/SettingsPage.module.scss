@@ -1,0 +1,13 @@
+// src/pages/settings/SettingsPage.module.scss
+@use "../../styles/variables" as v;
+
+.page {
+  background-color: v.$color-surface;
+  border-radius: v.$radius-md;
+  padding: v.$space-4;
+  box-shadow: v.$shadow-soft;
+
+  h1 {
+    margin-bottom: v.$space-2;
+  }
+}

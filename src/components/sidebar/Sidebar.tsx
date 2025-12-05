@@ -1,5 +1,4 @@
 // src/components/sidebar/Sidebar.tsx
-import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBreadSlice,
@@ -8,6 +7,7 @@ import {
   faGear,
   faChartLine,
 } from "@fortawesome/free-solid-svg-icons";
+import { NavLink } from "react-router-dom";
 import styles from "./Sidebar.module.scss";
 
 type SidebarProps = {
@@ -19,23 +19,25 @@ type MenuItem = {
   key: string;
   label: string;
   icon: any;
+  path: string;
 };
 
 const MENU_ITEMS: MenuItem[] = [
-  { key: "products", label: "Products", icon: faBreadSlice },
-  { key: "category", label: "Category", icon: faLayerGroup },
-  { key: "users", label: "Users", icon: faUsers },
-  { key: "settings", label: "Settings", icon: faGear },
-  { key: "analytics", label: "Analytics", icon: faChartLine },
+  { key: "products", label: "Products", icon: faBreadSlice, path: "/products" },
+  {
+    key: "categories",
+    label: "Category",
+    icon: faLayerGroup,
+    path: "/categories",
+  },
+  { key: "users", label: "Users", icon: faUsers, path: "/users" },
+  { key: "settings", label: "Settings", icon: faGear, path: "/settings" },
+  { key: "analytics", label: "Analytics", icon: faChartLine, path: "/analytics" },
 ];
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
-  const [activeKey, setActiveKey] = useState<string>("products");
-
-  const handleClick = (key: string) => {
-    setActiveKey(key);
-    // nanti dihubungkan ke routing (navigate) di step berikutnya
-    if (onClose) onClose();
+  const handleItemClick = () => {
+    if (onClose) onClose(); // tutup sidebar di mobile setelah klik menu
   };
 
   return (
@@ -49,15 +51,17 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           <ul className={styles.menu}>
             {MENU_ITEMS.map((item) => (
               <li key={item.key} className={styles.menuItemWrapper}>
-                <button
-                  type="button"
-                  className={`${styles.menuItem} ${activeKey === item.key ? styles.menuItemActive : ""
-                    }`}
-                  onClick={() => handleClick(item.key)}
+                <NavLink
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `${styles.menuItem} ${isActive ? styles.menuItemActive : ""
+                    }`
+                  }
+                  onClick={handleItemClick}
                 >
                   <FontAwesomeIcon icon={item.icon} />
                   <span>{item.label}</span>
-                </button>
+                </NavLink>
               </li>
             ))}
           </ul>
