@@ -1,5 +1,6 @@
 // src/pages/product/ProductPage.tsx
 import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPenToSquare,
@@ -11,10 +12,12 @@ import styles from "./ProductPage.module.scss";
 import { fetchProducts, type Product } from "../../services/productService";
 
 const SKELETON_ROWS = 6;
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 10;
 const ARTIFICIAL_DELAY_MS = 700; // biar skeleton kelihatan
 
 const ProductPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const [products, setProducts] = useState<Product[]>([]);
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
@@ -31,7 +34,7 @@ const ProductPage: React.FC = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearch(search.trim());
-      setPage(1); // setiap ganti search, reset ke halaman 1
+      setPage(1);
     }, 300);
 
     return () => clearTimeout(timer);
@@ -50,7 +53,6 @@ const ProductPage: React.FC = () => {
         search: debouncedSearch,
       });
 
-      // Tambah delay supaya skeleton kelihatan
       const [data] = await Promise.all([
         dataPromise,
         new Promise((resolve) =>
@@ -75,7 +77,6 @@ const ProductPage: React.FC = () => {
     }
   };
 
-  // Load pertama kali dan ketika debouncedSearch berubah
   useEffect(() => {
     loadProducts({ pageOverride: 1 });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -93,12 +94,16 @@ const ProductPage: React.FC = () => {
 
   const handleClickEdit = (product: Product) => {
     console.log("Edit produk:", product.id);
-    // TODO: nanti arahkan ke /products/:id/edit
+    // TODO: navigate(`/products/${product.id}/edit`);
   };
 
   const handleClickDelete = (product: Product) => {
     console.log("Hapus produk:", product.id);
-    // TODO: nanti panggil API DELETE dan refresh list
+    // TODO: panggil API delete
+  };
+
+  const handleClickAdd = () => {
+    navigate("/products/new");
   };
 
   const pageInfoText = useMemo(() => {
@@ -132,11 +137,10 @@ const ProductPage: React.FC = () => {
 
   return (
     <div className={styles.page}>
-      {/* HEADER */}
       <header className={styles.header}>
         <div className={styles.headerLeft}>
           <h1>Products</h1>
-          <p>Kelola daftar produk roti & pastry Alfarazka Bakery.</p>
+          <p>Kelola daftar produk roti &amp; pastry Alfarazka Bakery.</p>
         </div>
 
         <div className={styles.headerRight}>
@@ -154,13 +158,12 @@ const ProductPage: React.FC = () => {
             />
           </div>
 
-          <button className={styles.addButton} type="button">
+          <button className={styles.addButton} type="button" onClick={handleClickAdd}>
             + Tambah Produk
           </button>
         </div>
       </header>
 
-      {/* TABLE WRAPPER */}
       <section className={styles.tableSection}>
         <div className={styles.tableCard}>
           {errorMessage && (
@@ -256,7 +259,6 @@ const ProductPage: React.FC = () => {
             </table>
           </div>
 
-          {/* PAGINATION */}
           <div className={styles.paginationBar}>
             <div className={styles.pageInfo}>{pageInfoText}</div>
 

@@ -1,0 +1,248 @@
+// src/pages/product/ProductCreatePage.module.scss
+@use "../../styles/variables" as v;
+@use "../../styles/responsive" as r;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-3;
+}
+
+/* HEADER */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$space-3;
+
+  h1 {
+    margin: 0 0 0.4rem 0;
+    font-size: 2rem;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1.3rem;
+    color: v.$color-text-muted;
+  }
+}
+
+.backButton {
+  border-radius: v.$radius-md;
+  border: 0.1rem solid v.$color-border;
+  background-color: #fff;
+  padding: 0.7rem 1.4rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition:
+    background-color 0.12s ease,
+    border-color 0.12s ease;
+
+  &:hover {
+    background-color: v.$color-primary-soft;
+    border-color: v.$color-primary;
+  }
+}
+
+/* FORM SECTION */
+
+.formSection {
+  width: 100%;
+}
+
+.formCard {
+  background-color: v.$color-surface;
+  border-radius: v.$radius-md;
+  box-shadow: v.$shadow-soft;
+  padding: v.$space-4;
+}
+
+.alertError,
+.alertSuccess {
+  padding: 0.9rem 1.2rem;
+  border-radius: v.$radius-md;
+  font-size: 1.3rem;
+  margin-bottom: v.$space-3;
+}
+
+.alertError {
+  background-color: rgba(220, 38, 38, 0.05);
+  border: 0.1rem solid rgba(220, 38, 38, 0.4);
+  color: v.$color-danger;
+}
+
+.alertSuccess {
+  background-color: rgba(22, 163, 74, 0.05);
+  border: 0.1rem solid rgba(22, 163, 74, 0.4);
+  color: v.$color-success;
+}
+
+/* GRID */
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: v.$space-3;
+}
+
+.formField,
+.formFieldFull {
+  display: flex;
+  flex-direction: column;
+}
+
+.formFieldFull {
+  grid-column: 1 / -1;
+}
+
+label {
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+}
+
+.input,
+textarea {
+  border-radius: v.$radius-md;
+  border: 0.1rem solid v.$color-border;
+  padding: 0.7rem 1rem;
+  font-size: 1.3rem;
+  outline: none;
+  font-family: v.$font-family-base;
+
+  &:focus {
+    border-color: v.$color-primary;
+    box-shadow: 0 0 0 0.2rem rgba(230, 57, 70, 0.1);
+  }
+}
+
+textarea {
+  resize: vertical;
+  min-height: 6rem;
+}
+
+.inputError,
+.inputErrorFile {
+  border-color: v.$color-danger;
+  box-shadow: 0 0 0 0.15rem rgba(220, 38, 38, 0.1);
+}
+
+.errorText {
+  margin-top: 0.3rem;
+  font-size: 1.2rem;
+  color: v.$color-danger;
+}
+
+.helperText {
+  margin-top: 0.3rem;
+  font-size: 1.2rem;
+  color: v.$color-text-muted;
+}
+
+/* PREVIEW */
+
+.previewGrid {
+  margin-top: v.$space-2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-2;
+}
+
+.previewItem {
+  width: 6rem;
+  height: 6rem;
+  border-radius: v.$radius-md;
+  overflow: hidden;
+  border: 0.1rem solid v.$color-border;
+  background-color: v.$color-surface-muted;
+}
+
+.previewItem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ACTIONS */
+
+.actions {
+  margin-top: v.$space-4;
+  display: flex;
+  justify-content: flex-end;
+  gap: v.$space-2;
+}
+
+.primaryButton,
+.secondaryButton {
+  border-radius: v.$radius-md;
+  padding: 0.8rem 1.8rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+  border: none;
+}
+
+.primaryButton {
+  background-color: v.$color-primary;
+  color: #fff;
+  font-weight: 600;
+  transition:
+    background-color 0.12s ease,
+    transform 0.06s ease,
+    box-shadow 0.12s ease;
+
+  &:hover {
+    background-color: v.$color-primary-dark;
+    box-shadow: v.$shadow-soft;
+  }
+
+  &:active {
+    transform: translateY(0.06rem);
+    box-shadow: none;
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: default;
+  }
+}
+
+.secondaryButton {
+  background-color: #fff;
+  color: v.$color-text-main;
+  border: 0.1rem solid v.$color-border;
+
+  &:hover {
+    background-color: v.$color-surface-muted;
+  }
+}
+
+/* RESPONSIVE */
+
+@include r.respond-down("tablet") {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+
+    .secondaryButton,
+    .primaryButton {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
+@include r.respond-down("mobile") {
+  .formCard {
+    padding: v.$space-3;
+  }
+}
