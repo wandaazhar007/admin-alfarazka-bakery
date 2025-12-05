@@ -592,3 +592,53 @@
     background-position: -200% 0;
   }
 }
+
+/* USER INFO DI TABLE */
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.avatarCircle {
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 999rem;
+  background: linear-gradient(135deg,
+      v.$color-primary-soft,
+      #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: v.$color-primary-dark;
+  border: 0.1rem solid rgba(v.$color-border, 0.8);
+}
+
+.userName {
+  font-weight: 600;
+  font-size: 1.35rem;
+}
+
+.userMeta {
+  font-size: 1.2rem;
+  color: v.$color-text-muted;
+}
+
+.userRole {
+  font-weight: 500;
+  color: v.$color-primary-dark;
+}
+
+.userDate {
+  font-size: 1.3rem;
+}
+
+/* hint di modal */
+.modalHint {
+  font-size: 1.2rem;
+  color: v.$color-text-muted;
+  margin: 0 0 1.4rem 0;
+}
