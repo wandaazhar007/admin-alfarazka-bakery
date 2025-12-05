@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Navbar from "./components/navbar/Navbar";
 import Sidebar from "./components/sidebar/Sidebar";
-// import Footer from "./components/footer/Footer";
+import Footer from "./components/footer/Footer";
 
 const App: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -38,7 +38,7 @@ const App: React.FC = () => {
       </div>
 
       {/* FOOTER */}
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };
