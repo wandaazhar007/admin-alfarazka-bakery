@@ -24,7 +24,7 @@ const App: React.FC = () => {
   const isAuthPage = location.pathname === "/login";
 
   useEffect(() => {
-    // kalau token dihapus dari storage dan user bukan di /login → redirect ke /login
+    // Sinkron dengan localStorage
     if (!localStorage.getItem("alfarazka_admin_token")) {
       setIsLoggedIn(false);
     }
@@ -38,10 +38,24 @@ const App: React.FC = () => {
     setIsSidebarOpen(false);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("alfarazka_admin_token");
+    localStorage.removeItem("alfarazka_admin_name");
+    localStorage.removeItem("alfarazka_admin_email");
+    setIsLoggedIn(false);
+  };
+
+  // 🟢 PENTING: kalau SUDAH login dan akses /login → redirect ke /products
+  if (isLoggedIn && isAuthPage) {
+    return <Navigate to="/products" replace />;
+  }
+
+  // Kalau BELUM login dan bukan di /login → paksa ke /login
   if (!isLoggedIn && !isAuthPage) {
     return <Navigate to="/login" replace />;
   }
 
+  // Layout khusus untuk halaman login
   if (isAuthPage) {
     return (
       <LoginPage
@@ -52,9 +66,10 @@ const App: React.FC = () => {
     );
   }
 
+  // Layout utama admin (Navbar + Sidebar + Footer)
   return (
     <div className="app-shell">
-      <Navbar onToggleSidebar={handleToggleSidebar} />
+      <Navbar onToggleSidebar={handleToggleSidebar} onLogout={handleLogout} />
 
       <div className="app-shell__body">
         <div className="app-shell__inner">

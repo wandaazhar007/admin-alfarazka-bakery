@@ -14,9 +14,10 @@ import logoAlfarazka from "../../assets/images/logo-alfarazka-bakery.png";
 
 type NavbarProps = {
   onToggleSidebar?: () => void;
+  onLogout?: () => void; // ✅ tambah prop logout
 };
 
-const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
+const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar, onLogout }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
@@ -52,7 +53,12 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
   };
 
   const handleLogout = () => {
-    console.log("Logout");
+    // ✅ panggil fungsi logout dari parent
+    if (onLogout) {
+      onLogout();
+    } else {
+      console.log("Logout clicked (onLogout belum di-passing dari parent)");
+    }
     setIsDropdownOpen(false);
   };
 
