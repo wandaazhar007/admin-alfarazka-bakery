@@ -1,0 +1,219 @@
+// src/components/navbar/Navbar.module.scss
+@use "../../styles/variables" as v;
+@use "../../styles/responsive" as r;
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  height: v.$navbar-height;
+  background-color: v.$color-surface;
+  box-shadow: v.$shadow-soft;
+  width: 100%;
+}
+
+.inner {
+  height: 100%;
+  max-width: v.$layout-max-width; // batasi lebar di desktop
+  margin: 0 auto; // center
+  padding-inline: v.$space-4; // beri jarak dari sisi kiri/kanan
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @include r.respond-down("mobile") {
+    padding-inline: v.$space-2;
+  }
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: v.$space-2;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-2;
+}
+
+.logo {
+  width: 3.2rem;
+  height: 3.2rem;
+  object-fit: contain;
+}
+
+.title {
+  font-family: v.$font-family-heading;
+  font-weight: 600;
+  font-size: 1.6rem;
+  letter-spacing: 0.12rem;
+  color: v.$color-text-main;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 999px;
+  border: 0.1rem solid v.$color-border;
+  background-color: v.$color-surface;
+  cursor: pointer;
+  font-size: 1.6rem;
+  color: v.$color-text-main;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+
+  &:hover {
+    background-color: v.$color-surface-muted;
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+.right {
+  display: flex;
+  align-items: center;
+}
+
+.profileWrapper {
+  position: relative;
+}
+
+.profileButton {
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-2;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  border: 0.1rem solid v.$color-border;
+  background-color: v.$color-surface;
+  cursor: pointer;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease,
+    transform 0.1s ease;
+  min-width: 0;
+
+  &:hover {
+    background-color: v.$color-surface-muted;
+    box-shadow: v.$shadow-soft;
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+.avatar {
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg,
+      v.$color-primary,
+      v.$color-primary-dark );
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.profileName {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: v.$color-text-main;
+}
+
+.profileRole {
+  font-size: 1.1rem;
+  color: v.$color-text-muted;
+}
+
+// DROPDOWN
+.dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.8rem);
+  min-width: 18rem;
+  background-color: v.$color-surface;
+  border-radius: v.$radius-md;
+  box-shadow: v.$shadow-strong;
+  padding-block: 0.8rem;
+  opacity: 0;
+  transform: translateY(-0.4rem) scale(0.96);
+  transform-origin: top right;
+  pointer-events: none;
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+}
+
+.dropdownOpen {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.dropdownItem,
+.dropdownItemLogout {
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.3rem;
+  color: v.$color-text-main;
+  text-align: left;
+  transition: background-color 0.12s ease, color 0.12s ease;
+
+  svg {
+    font-size: 1.4rem;
+  }
+
+  &:hover {
+    background-color: v.$color-primary-soft;
+  }
+}
+
+.dropdownItemLogout {
+  color: v.$color-danger;
+
+  &:hover {
+    color: #fff;
+    background-color: v.$color-danger;
+  }
+}
+
+// RESPONSIVE
+@include r.respond-down("tablet") {
+  .title {
+    font-size: 1.3rem;
+    display: none; // hemat ruang di tablet/mobile
+  }
+
+  .hamburger {
+    display: inline-flex;
+  }
+
+  .profileButton {
+    padding-inline: 0.8rem;
+  }
+
+  .profileInfo {
+    display: none; // di mobile cukup avatar
+  }
+}

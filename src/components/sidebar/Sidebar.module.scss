@@ -1,0 +1,161 @@
+// src/components/sidebar/Sidebar.module.scss
+@use "../../styles/variables" as v;
+@use "../../styles/responsive" as r;
+
+.sidebar {
+  flex-shrink: 0;
+  width: v.$sidebar-width-desktop;
+  background: linear-gradient(160deg,
+      #fff7f7 0%,
+      v.$color-surface 55%,
+      v.$color-primary-soft 100%);
+  border-right: 0.1rem solid v.$color-border;
+  padding: v.$space-4 v.$space-3;
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-4;
+  min-height: calc(100vh - v.$navbar-height);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  box-shadow: none;
+}
+
+.sidebarOpen {
+  transform: translateX(0);
+  box-shadow: v.$shadow-soft;
+}
+
+.sidebarClosed {
+  transform: translateX(0); // di desktop sidebar tetap kelihatan
+}
+
+// NAVIGATION
+.nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionLabel {
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12rem;
+  color: v.$color-text-muted;
+  margin-bottom: v.$space-2;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.menuItemWrapper {
+  list-style: none;
+}
+
+.menuItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 0.9rem 1.2rem;
+  border-radius: v.$radius-md;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.3rem;
+  color: v.$color-text-main;
+  text-align: left;
+  transition:
+    background-color 0.14s ease,
+    color 0.14s ease,
+    transform 0.08s ease,
+    box-shadow 0.14s ease;
+
+  svg {
+    font-size: 1.4rem;
+    color: v.$color-primary-dark;
+  }
+
+  &:hover {
+    background-color: v.$color-primary-soft;
+    box-shadow: v.$shadow-soft;
+    transform: translateY(-0.06rem);
+  }
+
+  &:active {
+    transform: translateY(0.04rem);
+    box-shadow: none;
+  }
+}
+
+.menuItemActive {
+  background-color: v.$color-primary;
+  color: #ffffff;
+  box-shadow: v.$shadow-soft;
+
+  svg {
+    color: #ffffff;
+  }
+}
+
+// BOTTOM HINT
+.bottomHint {
+  padding-top: v.$space-2;
+  border-top: 0.1rem dashed v.$color-border;
+}
+
+.bottomText {
+  font-size: 1.2rem;
+  color: v.$color-text-muted;
+}
+
+// MOBILE BEHAVIOUR
+@include r.respond-down("tablet") {
+  .sidebar {
+    position: fixed;
+    top: v.$navbar-height;
+    left: 0;
+    height: calc(100vh - v.$navbar-height);
+    z-index: 45;
+    transform: translateX(-100%);
+    width: v.$sidebar-width-mobile;
+    box-shadow: v.$shadow-soft;
+  }
+
+  .sidebarOpen {
+    transform: translateX(0);
+  }
+
+  .sidebarClosed {
+    transform: translateX(-100%);
+  }
+}
+
+// OVERLAY UNTUK MOBILE
+.mobileOverlay {
+  display: none;
+  border: none;
+  background: transparent;
+}
+
+@include r.respond-down("tablet") {
+  .mobileOverlay {
+    display: block;
+    position: fixed;
+    top: v.$navbar-height;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.18s ease;
+    z-index: 40;
+  }
+
+  .mobileOverlayVisible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
