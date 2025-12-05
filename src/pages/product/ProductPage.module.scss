@@ -403,3 +403,57 @@
     align-items: flex-start;
   }
 }
+
+/* modal delete overlay */
+.deleteModalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+}
+
+.deleteModal {
+  background: #fff7f5;
+  border-radius: 1.2rem;
+  padding: 2.4rem;
+  max-width: 40rem;
+  width: 100%;
+  box-shadow: 0 1.2rem 3.2rem rgba(15, 23, 42, 0.18);
+
+  h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1.2rem;
+  }
+
+  p {
+    font-size: 1.4rem;
+    color: #4b5563;
+    margin-bottom: 2rem;
+  }
+}
+
+.deleteModalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.2rem;
+}
+
+.modalCancelButton {
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  font-size: 1.4rem;
+}
+
+.modalDeleteButton {
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  border: none;
+  background: #dc2626;
+  color: #fff;
+  font-size: 1.4rem;
+}

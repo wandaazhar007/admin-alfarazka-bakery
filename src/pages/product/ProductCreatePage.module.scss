@@ -150,12 +150,26 @@ textarea {
 }
 
 .previewItem {
+  position: relative;
   width: 6rem;
   height: 6rem;
   border-radius: v.$radius-md;
   overflow: hidden;
   border: 0.1rem solid v.$color-border;
   background-color: v.$color-surface-muted;
+}
+
+.removeImageButton {
+  position: absolute;
+  right: 0.6rem;
+  top: 0.6rem;
+  padding: 0.2rem 0.8rem;
+  border-radius: 999px;
+  border: none;
+  font-size: 1.1rem;
+  background: rgba(220, 38, 38, 0.92);
+  color: #fff;
+  cursor: pointer;
 }
 
 .previewItem img {
