@@ -1,13 +1,594 @@
-// src/pages/users/UsersPage.module.scss
+// src/pages/product/ProductPage.module.scss
 @use "../../styles/variables" as v;
+@use "../../styles/responsive" as r;
 
 .page {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-3;
+}
+
+/* HEADER */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$space-3;
+}
+
+.headerLeft {
+  h1 {
+    margin: 0 0 0.4rem 0;
+    font-size: 2rem;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1.3rem;
+    color: v.$color-text-muted;
+  }
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: v.$space-3;
+}
+
+.searchWrapper {
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.3rem;
+  color: v.$color-text-muted;
+}
+
+.searchInput {
+  min-width: 20rem;
+  padding: 0.7rem 1.2rem 0.7rem 3rem;
+  border-radius: v.$radius-md;
+  border: 0.1rem solid v.$color-border;
+  font-size: 1.3rem;
+  outline: none;
+
+  &:focus {
+    border-color: v.$color-primary;
+    box-shadow: 0 0 0 0.2rem rgba(230, 57, 70, 0.15);
+  }
+}
+
+.addButton {
+  border: none;
+  border-radius: v.$radius-md;
+  padding: 0.8rem 1.6rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  background-color: v.$color-primary;
+  color: #fff;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color 0.15s ease,
+    transform 0.08s ease,
+    box-shadow 0.15s ease;
+
+  &:hover {
+    background-color: v.$color-primary-dark;
+    box-shadow: v.$shadow-soft;
+  }
+
+  &:active {
+    transform: translateY(0.08rem);
+    box-shadow: none;
+  }
+}
+
+/* TABLE SECTION */
+
+.tableSection {
+  width: 100%;
+}
+
+.tableCard {
   background-color: v.$color-surface;
   border-radius: v.$radius-md;
-  padding: v.$space-4;
   box-shadow: v.$shadow-soft;
+  padding: v.$space-4;
 
-  h1 {
-    margin-bottom: v.$space-2;
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-3;
+}
+
+.errorBanner {
+  padding: 0.9rem 1.2rem;
+  border-radius: v.$radius-md;
+  background-color: rgba(220, 38, 38, 0.05);
+  border: 0.1rem solid rgba(220, 38, 38, 0.4);
+  color: v.$color-danger;
+  font-size: 1.3rem;
+}
+
+/* TABLE */
+
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 56rem;
+}
+
+.table thead {
+  background-color: #fff5f5;
+}
+
+.table th,
+.table td {
+  padding: 0.9rem 1rem;
+  font-size: 1.3rem;
+  text-align: left;
+  border-bottom: 0.1rem solid rgba(v.$color-border, 0.7);
+}
+
+.table th {
+  font-weight: 600;
+  color: v.$color-text-muted;
+}
+
+.thAction {
+  text-align: right;
+}
+
+.tdAction {
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* IMAGE CELL */
+
+.imageCellWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: v.$radius-md;
+  border: 0.1rem solid rgba(v.$color-border, 0.7);
+  padding: 0.2rem;
+  background-color: #fff;
+}
+
+.productImage {
+  width: 4rem;
+  height: 4rem;
+  border-radius: v.$radius-sm;
+  object-fit: cover;
+}
+
+.imagePlaceholder {
+  width: 4rem;
+  height: 4rem;
+  border-radius: v.$radius-sm;
+  background: linear-gradient(135deg,
+      v.$color-primary-soft,
+      #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+/* NAME CELL */
+
+.nameCell {
+  display: flex;
+  flex-direction: column;
+}
+
+.productName {
+  font-weight: 500;
+}
+
+/* BADGE & PRICE */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999rem;
+  background-color: #f1f5f9;
+  color: v.$color-text-muted;
+  font-size: 1.2rem;
+}
+
+.price {
+  font-weight: 600;
+}
+
+/* ACTION BUTTONS */
+
+.iconButton {
+  border: none;
+  background: transparent;
+  padding: 0.4rem;
+  margin-left: 0.4rem;
+  border-radius: 999rem;
+  cursor: pointer;
+  font-size: 1.3rem;
+  color: v.$color-text-muted;
+  transition:
+    background-color 0.12s ease,
+    color 0.12s ease,
+    transform 0.06s ease;
+
+  &:hover {
+    background-color: v.$color-primary-soft;
+    color: v.$color-primary-dark;
+    transform: translateY(-0.04rem);
+  }
+
+  &:active {
+    transform: translateY(0.04rem);
+  }
+}
+
+.iconButtonDanger {
+  &:hover {
+    background-color: rgba(220, 38, 38, 0.08);
+    color: v.$color-danger;
+  }
+}
+
+/* EMPTY STATE */
+
+.emptyState {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 1.3rem;
+  color: v.$color-text-muted;
+}
+
+/* SKELETON LOADING */
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.skeletonRow td {
+  padding: 0.9rem 1rem;
+}
+
+.skeletonBox,
+.skeletonBoxShort,
+.skeletonBoxSmall,
+.skeletonBoxAction {
+  border-radius: v.$radius-sm;
+  background: linear-gradient(90deg,
+      #f1f5f9 0%,
+      #e2e8f0 50%,
+      #f1f5f9 100%);
+  background-size: 200% 100%;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.skeletonBox {
+  height: 1.4rem;
+  width: 12rem;
+}
+
+.skeletonBoxShort {
+  height: 1.4rem;
+  width: 8rem;
+}
+
+.skeletonBoxSmall {
+  height: 4rem;
+  width: 4rem;
+}
+
+.skeletonBoxAction {
+  height: 1.6rem;
+  width: 6rem;
+  margin-left: auto;
+}
+
+/* PAGINATION */
+
+.paginationBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$space-3;
+  font-size: 1.25rem;
+  margin-top: 0.4rem;
+}
+
+.pageInfo {
+  color: v.$color-text-muted;
+}
+
+.paginationControls {
+  display: flex;
+  align-items: center;
+  gap: v.$space-2;
+}
+
+.pageButton {
+  border-radius: v.$radius-md;
+  border: 0.1rem solid v.$color-border;
+  background-color: #fff;
+  padding: 0.5rem 1.1rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition:
+    background-color 0.12s ease,
+    color 0.12s ease,
+    border-color 0.12s ease;
+
+  &:hover {
+    background-color: v.$color-primary-soft;
+    border-color: v.$color-primary;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+    background-color: #f8fafc;
+  }
+}
+
+.pageIndicator {
+  color: v.$color-text-muted;
+}
+
+/* RESPONSIVE */
+
+@include r.respond-down("tablet") {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .headerRight {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .searchInput {
+    min-width: 16rem;
+  }
+
+  .tableCard {
+    padding: v.$space-3;
+  }
+}
+
+@include r.respond-down("mobile") {
+  .headerRight {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .addButton {
+    width: 100%;
+    text-align: center;
+  }
+
+  .table {
+    min-width: 0;
+  }
+
+  .paginationBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* modal delete overlay */
+.deleteModalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+}
+
+.deleteModal {
+  background: #fff7f5;
+  border-radius: 1.2rem;
+  padding: 2.4rem;
+  max-width: 40rem;
+  width: 100%;
+  box-shadow: 0 1.2rem 3.2rem rgba(15, 23, 42, 0.18);
+
+  h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1.2rem;
+  }
+
+  p {
+    font-size: 1.4rem;
+    color: #4b5563;
+    margin-bottom: 2rem;
+  }
+}
+
+.deleteModalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.2rem;
+}
+
+.modalCancelButton {
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  font-size: 1.4rem;
+}
+
+.modalDeleteButton {
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  border: none;
+  background: #dc2626;
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+/* modal overlay & card */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+}
+
+.modalCard {
+  background: #ffffff;
+  border-radius: 1.2rem;
+  padding: 2.4rem;
+  max-width: 40rem;
+  width: 100%;
+  box-shadow: 0 1.2rem 3.2rem rgba(15, 23, 42, 0.18);
+
+  h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1.6rem;
+  }
+
+  p {
+    font-size: 1.4rem;
+    color: #4b5563;
+    margin-bottom: 2rem;
+  }
+}
+
+.modalField {
+  margin-bottom: 2rem;
+
+  label {
+    display: block;
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.8rem 1.2rem;
+    border-radius: 0.6rem;
+    border: 1px solid #e5e7eb;
+    font-size: 1.4rem;
+  }
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.2rem;
+}
+
+.modalCancelButton {
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  font-size: 1.4rem;
+}
+
+.modalPrimaryButton {
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  border: none;
+  background: v.$color-primary;
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+.modalDeleteButton {
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  border: none;
+  background: #dc2626;
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+.inputError {
+  border-color: #dc2626;
+}
+
+.errorText {
+  margin-top: 0.4rem;
+  font-size: 1.2rem;
+  color: #dc2626;
+}
+
+/* skeleton */
+.skeletonRow {
+  td {
+    padding: 0.8rem 1.2rem;
+  }
+}
+
+.skeletonBox,
+.skeletonBoxShort,
+.skeletonBoxAction {
+  border-radius: 999px;
+  background: linear-gradient(90deg,
+      #e5e7eb 0%,
+      #f3f4f6 50%,
+      #e5e7eb 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+.skeletonBox {
+  height: 1.6rem;
+  width: 60%;
+}
+
+.skeletonBoxShort {
+  height: 1.6rem;
+  width: 40%;
+}
+
+.skeletonBoxAction {
+  height: 1.6rem;
+  width: 5.6rem;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
   }
 }
