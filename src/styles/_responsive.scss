@@ -1,0 +1,68 @@
+// src/styles/_responsive.scss
+@use "./variables" as *;
+
+// Media query helpers
+@mixin respond-up($bp-name) {
+  $bp-value: map-get($breakpoints, $bp-name);
+
+  @if $bp-value {
+    @media (min-width: $bp-value) {
+      @content;
+    }
+  }
+
+  @else {
+    @warn "Unknown breakpoint `#{$bp-name}`";
+  }
+}
+
+@mixin respond-down($bp-name) {
+  $bp-value: map-get($breakpoints, $bp-name);
+
+  @if $bp-value {
+
+    // -0.02px supaya tidak overlap dengan respond-up
+    @media (max-width: ($bp-value - 0.02px)) {
+      @content;
+    }
+  }
+
+  @else {
+    @warn "Unknown breakpoint `#{$bp-name}`";
+  }
+}
+
+// Contoh helper layout global untuk main admin shell
+.app-shell {
+  min-height: 100vh;
+  background-color: $color-bg;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.app-shell__body {
+  flex: 1;
+  display: flex;
+  min-height: calc(100vh - $navbar-height);
+}
+
+.app-shell__content {
+  flex: 1;
+  padding: $space-4;
+  max-width: $layout-max-width;
+  margin: 0 auto;
+}
+
+// Responsiveness dasar
+@include respond-down("tablet") {
+  .app-shell__content {
+    padding: $space-3;
+  }
+}
+
+@include respond-down("mobile") {
+  .app-shell__content {
+    padding: $space-2;
+  }
+}
