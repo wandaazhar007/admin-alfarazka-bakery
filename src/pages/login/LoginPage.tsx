@@ -14,7 +14,7 @@ const emailRegex =
 const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("admin@alfarazka.com");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [isSubmitting, setIsSubmitting] = useState(false);
