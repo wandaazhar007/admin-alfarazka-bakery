@@ -1,4 +1,3 @@
-// src/services/categoryService.ts
 import apiClient from "../lib/apiClient";
 
 export type Category = {
@@ -12,7 +11,7 @@ export type Category = {
 export async function fetchCategories(): Promise<Category[]> {
   const res = await apiClient.get("/categories", {
     params: {
-      isActive: true, // kalau backend kamu pakai filter aktif
+      isActive: true, // kalau backend pakai filter aktif
     },
   });
 

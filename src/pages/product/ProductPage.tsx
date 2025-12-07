@@ -1,4 +1,3 @@
-// src/pages/product/ProductPage.tsx
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -35,7 +34,6 @@ const ProductPage: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const [isDeletingId, setIsDeletingId] = useState<string | null>(null);
-  const [total, setTotal] = useState(0);
 
   // ----- STATE UNTUK MODAL DELETE -----
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -124,13 +122,13 @@ const ProductPage: React.FC = () => {
   // ----- KONFIRMASI DELETE (dipanggil dari modal) -----
   const confirmDelete = async () => {
     if (!productToDelete) return;
-    const { id, name } = productToDelete;
+    const { id } = productToDelete;
 
     try {
       setIsDeletingId(id);
       await deleteProduct(id);
       setProducts((prev) => prev.filter((p) => p.id !== id));
-      setTotal((prev) => Math.max(0, prev - 1));
+      setTotalItems((prev) => Math.max(0, prev - 1));
       closeDeleteModal();
     } catch (err: any) {
       console.error("Gagal menghapus produk:", err);

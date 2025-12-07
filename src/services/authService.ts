@@ -1,4 +1,3 @@
-// src/services/authService.ts
 import apiClient from "../lib/apiClient";
 
 export type AdminUser = {

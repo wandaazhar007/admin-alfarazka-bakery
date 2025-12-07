@@ -1,4 +1,3 @@
-// src/pages/analytics/AnalyticsPage.tsx
 import styles from "./AnalyticsPage.module.scss";
 
 const AnalyticsPage: React.FC = () => {

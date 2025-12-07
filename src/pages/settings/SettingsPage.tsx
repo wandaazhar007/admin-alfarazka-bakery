@@ -1,4 +1,3 @@
-// src/pages/settings/SettingsPage.tsx
 import styles from "./SettingsPage.module.scss";
 
 const SettingsPage: React.FC = () => {

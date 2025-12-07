@@ -1,4 +1,3 @@
-// src/pages/category/CategoryPage.tsx
 import { useEffect, useMemo, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {

@@ -1,4 +1,3 @@
-// src/components/navbar/Navbar.tsx
 import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -14,7 +13,7 @@ import logoAlfarazka from "../../assets/images/logo-alfarazka-bakery.png";
 
 type NavbarProps = {
   onToggleSidebar?: () => void;
-  onLogout?: () => void; // ✅ tambah prop logout
+  onLogout?: () => void; // tambah prop logout
 };
 
 const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar, onLogout }) => {
@@ -53,7 +52,7 @@ const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar, onLogout }) => {
   };
 
   const handleLogout = () => {
-    // ✅ panggil fungsi logout dari parent
+    // panggil fungsi logout dari parent
     if (onLogout) {
       onLogout();
     } else {
