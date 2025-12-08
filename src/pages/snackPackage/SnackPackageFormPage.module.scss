@@ -1,0 +1,251 @@
+@use "../../styles/variables" as v;
+@use "../../styles/responsive" as r;
+
+.page {
+  padding: v.$space-4;
+  max-width: 72rem;
+  margin: 0 auto;
+
+  @include r.respond-down("mobile") {
+    padding: v.$space-3 v.$space-2;
+  }
+}
+
+.loadingInitial {
+  padding: v.$space-4 0;
+  text-align: center;
+  font-size: 1.4rem;
+  color: v.$color-text-muted;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: v.$space-3;
+  margin-bottom: v.$space-3;
+  flex-wrap: wrap;
+
+  h1 {
+    margin: 0 0 v.$space-1 0;
+    font-size: 2.1rem;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1.3rem;
+    color: v.$color-text-muted;
+    max-width: 46rem;
+  }
+}
+
+.backButton {
+  padding: 0.7rem 1.5rem;
+  border-radius: 999rem;
+  border: 0.1rem solid v.$color-border;
+  background-color: #ffffff;
+  font-size: 1.3rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.08s ease;
+
+  &:hover {
+    background-color: v.$color-surface-muted;
+    border-color: v.$color-primary-soft;
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+.formSection {
+  margin-top: v.$space-1;
+}
+
+.formCard {
+  background-color: v.$color-surface;
+  border-radius: v.$radius-lg;
+  box-shadow: v.$shadow-soft;
+  padding: v.$space-4 v.$space-4 v.$space-3;
+}
+
+.alertError,
+.alertSuccess {
+  padding: 1.1rem 1.4rem;
+  border-radius: v.$radius-md;
+  font-size: 1.3rem;
+  margin-bottom: v.$space-3;
+}
+
+.alertError {
+  background-color: rgba(220, 38, 38, 0.08);
+  color: v.$color-danger;
+}
+
+.alertSuccess {
+  background-color: rgba(22, 163, 74, 0.12);
+  color: v.$color-success;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: v.$space-3;
+
+  @include r.respond-down("tablet") {
+    grid-template-columns: 1fr;
+  }
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+}
+
+.formFieldInline {
+  grid-column: 1 / -1;
+  margin-top: v.$space-1;
+
+  @include r.respond-down("tablet") {
+    grid-column: auto;
+  }
+}
+
+label {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: v.$color-text-main;
+  margin-bottom: 0.4rem;
+}
+
+.required {
+  color: v.$color-danger;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  border-radius: v.$radius-md;
+  border: 0.1rem solid v.$color-border;
+  padding: 0.8rem 1rem;
+  font-size: 1.3rem;
+  outline: none;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: v.$color-primary;
+  box-shadow: 0 0 0 0.1rem rgba(230, 57, 70, 0.18);
+  background-color: #fff;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 5.6rem;
+}
+
+.inputError {
+  border-color: v.$color-danger;
+  background-color: #fef2f2;
+}
+
+.errorText {
+  margin-top: 0.3rem;
+  font-size: 1.15rem;
+  color: v.$color-danger;
+}
+
+.charInfo {
+  margin-top: 0.3rem;
+  font-size: 1.15rem;
+  color: v.$color-text-muted;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.charInfoError {
+  color: v.$color-danger;
+}
+
+.checkboxLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 1.3rem;
+  color: v.$color-text-main;
+
+  input[type="checkbox"] {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+}
+
+/* ACTION BUTTONS */
+.actions {
+  margin-top: v.$space-4;
+  display: flex;
+  justify-content: flex-end;
+  gap: v.$space-2;
+}
+
+.primaryButton {
+  padding: 0.85rem 1.8rem;
+  border-radius: 999rem;
+  border: none;
+  background-color: v.$color-primary;
+  color: #ffffff;
+  font-size: 1.35rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    transform 0.08s ease,
+    box-shadow 0.15s ease;
+
+  &:hover {
+    background-color: v.$color-primary-dark;
+    box-shadow: v.$shadow-soft;
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+}
+
+.secondaryButton {
+  padding: 0.85rem 1.6rem;
+  border-radius: 999rem;
+  border: 0.1rem solid v.$color-border;
+  background-color: #ffffff;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    transform 0.08s ease;
+
+  &:hover {
+    background-color: v.$color-surface-muted;
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+}

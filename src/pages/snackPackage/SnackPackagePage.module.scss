@@ -1,0 +1,391 @@
+@use "../../styles/variables" as v;
+@use "../../styles/responsive" as r;
+
+.page {
+  padding: v.$space-4;
+  max-width: v.$layout-max-width;
+  margin: 0 auto;
+
+  @include r.respond-down("mobile") {
+    padding: v.$space-3 v.$space-2;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: v.$space-3;
+  margin-bottom: v.$space-3;
+  flex-wrap: wrap;
+}
+
+.headerLeft {
+  h1 {
+    margin: 0 0 v.$space-1 0;
+    font-size: 2.2rem;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1.35rem;
+    color: v.$color-text-muted;
+    max-width: 46rem;
+  }
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: v.$space-2;
+  flex-wrap: wrap;
+}
+
+.searchWrapper {
+  position: relative;
+  min-width: 22rem;
+  max-width: 28rem;
+  flex: 1;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.3rem;
+  color: v.$color-text-muted;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.8rem 1rem 0.8rem 2.8rem;
+  border-radius: v.$radius-md;
+  border: 0.1rem solid v.$color-border;
+  font-size: 1.3rem;
+  outline: none;
+
+  &:focus {
+    border-color: v.$color-primary;
+    box-shadow: 0 0 0 0.1rem rgba(230, 57, 70, 0.15);
+  }
+}
+
+.addButton {
+  padding: 0.8rem 1.6rem;
+  border-radius: 999rem;
+  border: none;
+  background-color: v.$color-primary;
+  color: #fff;
+  font-size: 1.35rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color 0.15s ease,
+    transform 0.08s ease,
+    box-shadow 0.15s ease;
+
+  &:hover {
+    background-color: v.$color-primary-dark;
+    box-shadow: v.$shadow-soft;
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+/* FILTER BAR */
+.filterBar {
+  margin-bottom: v.$space-3;
+  display: flex;
+  align-items: center;
+  gap: v.$space-2;
+  flex-wrap: wrap;
+}
+
+.filterLabel {
+  font-size: 1.3rem;
+  color: v.$color-text-muted;
+}
+
+.filterChips {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.filterChip {
+  padding: 0.45rem 1.4rem;
+  border-radius: 999rem;
+  border: 0.1rem solid v.$color-border;
+  background-color: #fff;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+
+  &:hover {
+    border-color: v.$color-primary-soft;
+    background-color: v.$color-primary-soft;
+  }
+}
+
+.filterChipActive {
+  border-color: v.$color-primary;
+  background-color: v.$color-primary-soft;
+  color: v.$color-primary-dark;
+}
+
+/* TABLE SECTION */
+.tableSection {
+  margin-top: v.$space-1;
+}
+
+.tableCard {
+  background-color: v.$color-surface;
+  border-radius: v.$radius-lg;
+  box-shadow: v.$shadow-soft;
+  padding: v.$space-3;
+}
+
+.errorBanner {
+  margin-bottom: v.$space-3;
+  padding: 1.2rem 1.6rem;
+  border-radius: v.$radius-md;
+  background-color: rgba(220, 38, 38, 0.08);
+  color: v.$color-danger;
+  font-size: 1.3rem;
+}
+
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.3rem;
+
+  th,
+  td {
+    padding: 0.9rem 0.8rem;
+    text-align: left;
+    border-bottom: 0.1rem solid v.$color-border;
+    vertical-align: top;
+  }
+
+  th {
+    font-size: 1.25rem;
+    color: v.$color-text-muted;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+}
+
+.thAction {
+  text-align: right;
+}
+
+.emptyState {
+  text-align: center;
+  padding: v.$space-4 0;
+  color: v.$color-text-muted;
+}
+
+/* NAME CELL */
+.nameCell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.packageName {
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: v.$color-text-main;
+}
+
+.fitFor {
+  font-size: 1.2rem;
+  color: v.$color-text-muted;
+}
+
+/* SHORT DESC */
+.shortDesc {
+  font-size: 1.25rem;
+  color: v.$color-text-muted;
+}
+
+/* PRICE */
+.price {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: v.$color-text-main;
+}
+
+/* STATUS BADGE */
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.2rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999rem;
+}
+
+.statusActive {
+  background-color: rgba(22, 163, 74, 0.1);
+  color: v.$color-success;
+}
+
+.statusInactive {
+  background-color: rgba(107, 114, 128, 0.16);
+  color: v.$color-text-muted;
+}
+
+/* ACTION BUTTONS */
+.tdAction {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.iconButton {
+  border: none;
+  background: transparent;
+  padding: 0.3rem 0.5rem;
+  cursor: pointer;
+  font-size: 1.3rem;
+  color: v.$color-text-main;
+  transition: color 0.12s ease, transform 0.08s ease;
+
+  &:hover {
+    color: v.$color-primary-dark;
+    transform: translateY(-0.04rem);
+  }
+}
+
+.iconButtonDanger {
+  color: v.$color-danger;
+
+  &:hover {
+    color: #b91c1c;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+    transform: none;
+  }
+}
+
+/* SKELETON */
+.skeletonRow td {
+  border-bottom-color: transparent;
+}
+
+.skeletonLine,
+.skeletonStatus,
+.skeletonActions {
+  height: 1.1rem;
+  border-radius: v.$radius-sm;
+  background: linear-gradient(90deg,
+      v.$color-surface-muted 0%,
+      #e5e7eb 50%,
+      v.$color-surface-muted 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite linear;
+}
+
+.skeletonStatus {
+  width: 60%;
+}
+
+.skeletonActions {
+  width: 50%;
+  margin-left: auto;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* PAGINATION */
+.paginationBar {
+  margin-top: v.$space-3;
+  padding-top: v.$space-2;
+  border-top: 0.1rem solid v.$color-border;
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-2;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pageInfo {
+  font-size: 1.25rem;
+  color: v.$color-text-muted;
+}
+
+.paginationControls {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.pageButton {
+  padding: 0.6rem 1.4rem;
+  border-radius: 999rem;
+  border: 0.1rem solid v.$color-border;
+  background-color: #ffffff;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.08s ease;
+
+  &:hover {
+    background-color: v.$color-primary-soft;
+    border-color: v.$color-primary;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+    background-color: v.$color-surface-muted;
+  }
+}
+
+.pageIndicator {
+  font-size: 1.25rem;
+  color: v.$color-text-main;
+}
+
+/* RESPONSIVE */
+@include r.respond-down("tablet") {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .headerRight {
+    width: 100%;
+  }
+
+  .searchWrapper {
+    max-width: 100%;
+  }
+}
