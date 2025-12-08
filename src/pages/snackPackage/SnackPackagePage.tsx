@@ -1,3 +1,4 @@
+// src/pages/snackPackage/SnackPackagePage.tsx
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,6 +8,7 @@ import {
   faMagnifyingGlass,
   faCircleCheck,
   faCircleXmark,
+  faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./SnackPackagePage.module.scss";
@@ -38,7 +40,14 @@ const SnackPackagePage: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isInitialLoad, setIsInitialLoad] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
   const [isDeletingId, setIsDeletingId] = useState<string | null>(null);
+
+  // state untuk modal confirm delete
+  const [deleteTarget, setDeleteTarget] = useState<{
+    id: string;
+    name: string;
+  } | null>(null);
 
   // debounce search
   useEffect(() => {
@@ -113,24 +122,36 @@ const SnackPackagePage: React.FC = () => {
     navigate(`/snack-packages/${id}/edit`);
   };
 
-  const handleDelete = async (id: string, name: string) => {
-    // akan kita ganti dengan modal custom nanti kalau mau
-    const ok = window.confirm(
-      `Yakin ingin menghapus paket "${name}"? Paket akan dinonaktifkan / dihapus.`
-    );
-    if (!ok) return;
+  // buka modal ketika user klik icon trash
+  const handleOpenDeleteModal = (id: string, name: string) => {
+    setDeleteTarget({ id, name });
+  };
+
+  const handleCloseDeleteModal = () => {
+    if (isDeletingId) return; // lagi proses, jangan ditutup dulu
+    setDeleteTarget(null);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!deleteTarget) return;
+
+    const { id, name } = deleteTarget;
 
     try {
       setIsDeletingId(id);
       await deleteSnackPackage(id);
+
+      // hapus dari state list
       setItems((prev) => prev.filter((p) => p.id !== id));
       setTotalItems((prev) => Math.max(0, prev - 1));
+
+      setDeleteTarget(null);
     } catch (err: any) {
       console.error("Gagal menghapus paket:", err);
       alert(
         err?.response?.data?.message ||
         err?.message ||
-        "Gagal menghapus paket snack."
+        `Gagal menghapus paket snack "${name}".`
       );
     } finally {
       setIsDeletingId(null);
@@ -288,8 +309,8 @@ const SnackPackagePage: React.FC = () => {
                       <td>
                         <span
                           className={`${styles.statusBadge} ${pkg.isActive
-                            ? styles.statusActive
-                            : styles.statusInactive
+                              ? styles.statusActive
+                              : styles.statusInactive
                             }`}
                         >
                           <FontAwesomeIcon
@@ -310,7 +331,7 @@ const SnackPackagePage: React.FC = () => {
                         <button
                           type="button"
                           className={`${styles.iconButton} ${styles.iconButtonDanger}`}
-                          onClick={() => handleDelete(pkg.id, pkg.name)}
+                          onClick={() => handleOpenDeleteModal(pkg.id, pkg.name)}
                           disabled={isDeletingId === pkg.id}
                           aria-label="Hapus paket"
                         >
@@ -355,6 +376,48 @@ const SnackPackagePage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* MODAL KONFIRMASI DELETE */}
+      {deleteTarget && (
+        <div
+          className={styles.modalBackdrop}
+          onClick={handleCloseDeleteModal}
+        >
+          <div
+            className={styles.modal}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={styles.modalIcon}>
+              <FontAwesomeIcon icon={faTriangleExclamation} />
+            </div>
+            <h2 className={styles.modalTitle}>Hapus paket snack?</h2>
+            <p className={styles.modalBodyText}>
+              Paket <strong>{deleteTarget.name}</strong> akan dinonaktifkan dari
+              daftar paket snack. Kamu masih bisa membuat paket baru kapan saja.
+              Yakin ingin melanjutkan?
+            </p>
+
+            <div className={styles.modalActions}>
+              <button
+                type="button"
+                className={styles.modalButtonSecondary}
+                onClick={handleCloseDeleteModal}
+                disabled={!!isDeletingId}
+              >
+                Batal
+              </button>
+              <button
+                type="button"
+                className={styles.modalButtonDanger}
+                onClick={handleConfirmDelete}
+                disabled={!!isDeletingId}
+              >
+                {isDeletingId ? "Menghapus..." : "Ya, hapus paket"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "../../styles/variables" as v;
 @use "../../styles/responsive" as r;
 
@@ -387,5 +388,128 @@
 
   .searchWrapper {
     max-width: 100%;
+  }
+}
+
+/* ===== DELETE CONFIRM MODAL ===== */
+
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 80;
+  padding: 1.6rem;
+}
+
+@keyframes modal-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(1.2rem) scale(0.96);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal {
+  width: 100%;
+  max-width: 40rem;
+  background-color: #ffffff;
+  border-radius: v.$radius-lg;
+  box-shadow: v.$shadow-strong;
+  padding: v.$space-5;
+  animation: modal-pop 0.18s ease-out;
+  text-align: center;
+}
+
+.modalIcon {
+  width: 4.2rem;
+  height: 4.2rem;
+  margin: 0 auto v.$space-3;
+  border-radius: 50%;
+  background: rgba(v.$color-danger, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: v.$color-danger;
+
+  svg {
+    font-size: 2rem;
+  }
+}
+
+.modalTitle {
+  margin: 0 0 v.$space-2 0;
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: v.$color-text-main;
+}
+
+.modalBodyText {
+  font-size: 1.35rem;
+  color: v.$color-text-muted;
+  margin: 0 0 v.$space-4 0;
+
+  strong {
+    color: v.$color-text-main;
+  }
+}
+
+.modalActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-2;
+  justify-content: flex-end;
+
+  @include r.respond-down("mobile") {
+    flex-direction: column-reverse;
+  }
+}
+
+.modalButtonSecondary,
+.modalButtonDanger {
+  min-width: 0;
+  padding: 0.8rem 1.4rem;
+  border-radius: v.$radius-md;
+  font-size: 1.3rem;
+  font-weight: 500;
+  border: 0.1rem solid transparent;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.08s ease;
+
+  &:disabled {
+    opacity: 0.65;
+    cursor: default;
+    transform: none;
+  }
+}
+
+.modalButtonSecondary {
+  background-color: #ffffff;
+  color: v.$color-text-main;
+  border-color: v.$color-border;
+
+  &:hover:not(:disabled) {
+    background-color: v.$color-surface-muted;
+  }
+}
+
+.modalButtonDanger {
+  background-color: v.$color-danger;
+  color: #ffffff;
+  border-color: v.$color-danger;
+
+  &:hover:not(:disabled) {
+    background-color: color.adjust(v.$color-danger, $lightness: -6%);
+    transform: translateY(-0.04rem);
   }
 }
