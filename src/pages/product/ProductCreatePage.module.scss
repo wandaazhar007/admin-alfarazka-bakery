@@ -230,6 +230,26 @@ textarea {
   }
 }
 
+
+/* TINY MCE EDITOR WRAPPER */
+.editorWrapper {
+  border-radius: v.$radius-md;
+  border: 0.1rem solid v.$color-border;
+  overflow: hidden;
+  background-color: #fff;
+
+  // Hilangkan border default dari TinyMCE frame
+  :global(.tox-tinymce) {
+    border: none;
+    border-radius: 0;
+  }
+}
+
+.editorWrapperError {
+  border-color: v.$color-danger;
+  box-shadow: 0 0 0 0.15rem rgba(220, 38, 38, 0.1);
+}
+
 /* RESPONSIVE */
 
 @include r.respond-down("tablet") {
