@@ -633,7 +633,7 @@ const ProductCreatePage: React.FC = () => {
                 >
                   <Editor
                     id="description"
-                    apiKey="YOUR_TINYMCE_API_KEY"
+                    apiKey={import.meta.env.VITE_TINYMCE_API_KEY}
                     value={description}
                     onEditorChange={(content) => setDescription(content)}
                     init={{
