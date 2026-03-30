@@ -7,6 +7,7 @@ import {
   faGear,
   faChartLine,
   faBoxTissue,
+  faPhoneVolume
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import styles from "./Sidebar.module.scss";
@@ -59,6 +60,12 @@ const MENU_ITEMS: MenuItem[] = [
     label: "Analytics",
     icon: faChartLine,
     path: "/analytics"
+  },
+  {
+    key: "site-settings",
+    label: "Kontak Bisnis",
+    icon: faPhoneVolume,
+    path: "/site-settings"
   }
 ];
 

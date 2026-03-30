@@ -16,6 +16,7 @@ import SettingsPage from "./pages/settings/SettingsPage";
 import AnalyticsPage from "./pages/analytics/AnalyticsPage";
 import SnackPackagePage from "./pages/snackPackage/SnackPackagePage";
 import SnackPackageFormPage from "./pages/snackPackage/SnackPackageFormPage";
+import SiteSettingsPage from "./pages/siteSettings/SiteSettingsPage";
 
 
 const App: React.FC = () => {
@@ -89,6 +90,7 @@ const App: React.FC = () => {
               <Route path="/snack-packages" element={<SnackPackagePage />} />
               <Route path="/snack-packages/new" element={<SnackPackageFormPage />} />
               <Route path="/snack-packages/:id/edit" element={<SnackPackageFormPage />} />
+              <Route path="/site-settings" element={<SiteSettingsPage />} />
             </Routes>
           </main>
         </div>
