@@ -1,3 +1,4 @@
+//src/components/sidebar/Sidebar.tsx
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBreadSlice,
